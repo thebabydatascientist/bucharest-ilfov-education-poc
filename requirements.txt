@@ -1,0 +1,27 @@
+# Core data processing
+pandas>=2.0.0
+requests>=2.31.0
+
+# HTML parsing (for future scrapers)
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# Geolocation / mapping (optional, for lat/lng enrichment)
+geopy>=2.4.0
+
+# Google Places API client (optional, for ratings)
+google-maps-services-python>=4.10.0
+
+# Environment variables / secrets
+python-dotenv>=1.0.0
+
+# Data validation
+pydantic>=2.0.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Code quality
+black>=23.0.0
+ruff>=0.1.0
