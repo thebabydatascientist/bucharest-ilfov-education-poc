@@ -1,0 +1,76 @@
+{
+  "region": "Bucharest-Ilfov",
+  "data_sources": [
+    {
+      "name": "insse_education_stats",
+      "type": "open_data_csv",
+      "description": "INS pre-university education statistics for Bucharest-Ilfov",
+      "url": "https://insse.ro/cms/ro/content/invatamant-prescolar-primar-si-gimnazial",
+      "update_frequency": "annual",
+      "fields_mapping": {
+        "school_name": "DEN_UNITATE",
+        "school_code": "COD_SIIIR",
+        "city": "LOCALITATE",
+        "sector_or_locality": "SECTOR",
+        "enrolment_2023": "ELEV_2023",
+        "enrolment_2022": "ELEV_2022",
+        "enrolment_2021": "ELEV_2021"
+      }
+    },
+    {
+      "name": "international_schools_directory",
+      "type": "open_data_html",
+      "description": "Directory of international schools in Bucharest with fees, ECAs, reviews",
+      "url": "https://www.international-schools-database.com/in/bucharest",
+      "update_frequency": "manual_quarterly",
+      "parsing_strategy": "custom_scraper",
+      "fields_mapping": {}
+    },
+    {
+      "name": "google_places",
+      "type": "api",
+      "description": "Google Places API for ratings, reviews, location, and contact details",
+      "url": "https://maps.googleapis.com/maps/api/place",
+      "update_frequency": "weekly",
+      "fields_mapping": {
+        "google_rating": "rating",
+        "google_review_count": "user_ratings_total",
+        "address": "formatted_address",
+        "phone": "formatted_phone_number",
+        "website": "website",
+        "lat": "geometry.location.lat",
+        "lng": "geometry.location.lng"
+      }
+    },
+    {
+      "name": "siiir_open_data",
+      "type": "open_data_csv",
+      "description": "SIIIR Romanian school registry with official school codes and metadata",
+      "url": "https://data.gov.ro/dataset/siiir",
+      "update_frequency": "annual",
+      "fields_mapping": {
+        "school_code": "cod_siiir",
+        "school_name": "denumire",
+        "school_type": "tip_unitate",
+        "locality": "localitate",
+        "county": "judet",
+        "address": "adresa"
+      }
+    }
+  ],
+  "filters": {
+    "counties": ["Bucuresti", "Ilfov"],
+    "age_ranges": ["6-11"],
+    "school_types": ["public", "private", "international"]
+  },
+  "scoring_weights": {
+    "academic_performance": 0.40,
+    "parent_satisfaction": 0.35,
+    "eca_richness": 0.25
+  },
+  "update_strategy": {
+    "full_refresh_annual": true,
+    "incremental_google_reviews": "weekly",
+    "incremental_exam_results": "annual"
+  }
+}
